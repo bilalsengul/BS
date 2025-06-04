@@ -1,0 +1,21 @@
+name: HTML Validator
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install html5validator
+        run: pip install html5validator
+      - name: Validate index.html
+        run: html5validator --root . --files index.html
